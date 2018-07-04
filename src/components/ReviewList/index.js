@@ -9,10 +9,10 @@ const ReviewList = (props) => {
     <ul className="list">
       {reviews.map((review, index) => (
         <li
-          onClick={() => selectReview(index)}
+          key={index}
+          onClick={() => selectReview(review, index)}
         >
           <ReviewItem
-            key={index}
             review={review}
             active={index === activeReviewIndex}
           />
@@ -24,7 +24,7 @@ const ReviewList = (props) => {
 
 ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired,
-  activeReviewIndex: PropTypes.number,
+  activeReviewIndex: PropTypes.number.isRequired,
   selectReview: PropTypes.func.isRequired,
 };
 
