@@ -17,6 +17,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'import/no-named-as-default': 'off',
     'react/no-unescaped-entities': 'off',
+    'no-useless-constructor': 'off',
   },
   env: {
     browser: true,
