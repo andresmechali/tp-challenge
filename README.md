@@ -23,6 +23,8 @@ by Andrés Mechali
 The widget that I built has the intention to display a list of reviews, provided in the file `reviews.json`, and a
 series of details for the chosen review. It also provides a brief summary about the product, based both in a fake
 productName and in the given reviews.
+For styling, I would have liked to use [styled components]('https://www.styled-components.com/'), which I think is great,
+but the task was to use custom SASS.
 
 # Instructions
 
@@ -41,6 +43,8 @@ For running the container:
 ```
 sudo docker run -p 3000:3000 challenge
 ```
+
+and once it's running, access `http://localhost:3000/`.
 
 ## Without docker
 
@@ -64,6 +68,11 @@ npm start
 
 and see it in `http://localhost:3000/`
 
+## Using other data set
+
+All the data is being taken from `reviews.json`. This file can be replaced by another valid json file, or the `reviews`
+array can be obtained through an API and passed to the `Main` container after some simple refactoring.
+
 # Architecture
 
 I am using React for building the interface and Redux for state management. The main reasons for choosing React are:
@@ -79,18 +88,11 @@ The structure I chose for the client is the following:
 
 ```
 ├── App.js
-├── App.test.js
 ├── components
-│   ├── IndividualResult
-│   ├── Loading
-│   ├── Log
-│   ├── NavBar
-│   ├── SearchBar
-│   ├── SearchResults
-│   └── UserProfile
-├── config
-│   ├── colors.js
-│   └── index.js
+│   ├── ReviewContent
+│   ├── ReviewItem
+│   ├── ReviewList
+│   └── ReviewMenu
 ├── containers
 │   ├── Admin
 │   ├── Login
@@ -102,26 +104,18 @@ The structure I chose for the client is the following:
 │   ├── configStore.js
 │   ├── constants.js
 │   └── reducers
-├── registerServiceWorker.js
-├── services
-├── setupTests.js
 └── utils
 ```
 
 ### Containers
 
-Every 'page' has it's own container. In the case of this project, I have one container for the login page,
-one for the main page, once the user has logged in, and one for the admin information.
+Every 'page' has it's own container. In the case of this project, there is just one, which is the main container.
 
 ### Components
 
-It holds all the components of the application. Each component has an `index.js` file with the actual component, and
-a `NameOfTheComponent.test.js` file, where the tests are described. A lot of components are missing tests, due to lack
-of time.
-
-### Config
-
-In this folder I have a file with Maersk's colors and a config file with github's api endpoint.
+It holds all the components of the application. Each component has an `index.js` file with the actual component.
+There should be a `NameOfTheComponent.test.js` file as well, where the tests are described, but I haven't tested the application
+due to lack of time.
 
 ### Redux
 
@@ -138,7 +132,7 @@ source to see all the available actions.
 
 #### actions
 
-A folder with all the actions, split in files according to their purpose, and some tests.
+A folder with all the actions, split in files according to their purpose. In this case, there is only one.
 
 #### reducers
 
@@ -147,91 +141,17 @@ combined and exported in a unique object.
 
 ### Styles
 
+This is where al the .scss files are contained. They are imported into the `index.scss` file, which is preprocessed.
+The files are split between different folders, depending on their role.
+
 ### Utils
 
 Functions with different purposes that can be used by any component. I have one which takes the raw data and processes
-it for using in the bar chart, and one for creating a list with the numbers used for pagination.
+it for obtaining the average of the ratings.
 
 ### index.js and App.js
 
 This files contain the basic code for rendering the application, after connecting it with the Redux store.
-
-### Libraries
-
-#### Styling
-
-- Bulma
-  - I chose this library because it's pretty, well documented, easy to use, and based on Flexbox. This makes it
-    very responsive. It also allows to preprocess the CSS, which gives the freedom to customize the styles and to
-    import just what is used.
-    I thought about using [styled components]('https://www.styled-components.com/'), which I have used a lot and it gives you the freedom to
-    apply styles for each component, but I considered it unnecessary for a small project.
-- Node-sass-chokidar
-  - Allows Node to compile .scss files
-
-#### Linting
-
-- ESLint
-  - Allows for creation of custom linting rules. I am using Airbnb's rules as base, and disabling the ones I don't
-    want to use.
-- Prettier
-  - It is an opinionated code formatter for JavaScript, CSS and JSON. I use it to format the code automatically to
-    keep the same code style within the whole project.
-
-#### Testing
-
-- Jest
-  - I chose Jest for running tests because it is developed and used by Facebook on all React applications.
-    It comes already installed with `create-react-app` so it requires no extra configuration to work.
-- Enzyme
-  - This library makes very easy to unit test components via shallow rendering, and integrated very smoothly
-    with Jest.
-- Prop-types
-  - This tool allows to ensure that each component receive all the necessary props and that they have the correct type.
-
-#### Routing
-
-- React Router
-  - This library provides all the components needed for navigating.
-
-#### State management
-
-- Redux
-  - This library allows to easily manage the state of the application. It allows every connected component to interact
-    with the same state, called `store`, using actions and reducers.
-- Redux-thunk
-  - This is a Redux middleware that allows me to write action creators, which are actions that return a function instead
-    of other actions. This is very useful when working with async functions, because actions can be dispatched depending
-    on the response of a request.
-
-#### Others
-
-- Axios
-  - An HTTP client based on Promises which is very easy to use and works well.
-- Pre-commit
-  - I use this library, together with Lint-staged to ensure that every file I commit respects all the linting rules, and
-    than all the tests pass. For every commit, Prettier is also run on all the staged files.
-- Lint-staged
-- Recharts
-  - Library for rendering graphs. I use it for the bar chart.
-- Express-status-monitor
-  - It is very easy to configure and use and it handles the monitoring of the whole application
-
-## Possible bugs
-
-### Cloud server
-
-Some companies block certain connections, so the cloud server might not work. In that case, try using the mobile's connection.
-If you access from a mobile, the content might not be displayed totally correct, because I designed the client to be displayed on a wide screen.
-
-### ENOSPC
-
-This issue is caused by the system reaching the maximum amount of watched processed.
-On Linux, run
-
-```
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-```
 
 # Further improvements
 
@@ -240,20 +160,10 @@ There are some aspects where I would put more time and effort if I had more time
 ## Testing
 
 React components take a lot of time to test. Much more time than they take to write. Every component should have an extensive suite of tests, not only checking that
-they render, but also that they interact correctly with each other. Redux adds an extra layer of complexity here, because every connected component should be tested more
-extensively, including it's interactions with the store.
+they render, but also that they interact correctly with each other.
 
-In this project, I just wrote a few tests in order to show that I know the tools, and that I'm aware of the importance of testing.
+If I had more time to dedicate to this challenge, I would unit test extensively each component.
 
-## Security
+## Type checking
 
-For security reasons, all the sensible information should be kept on a file that is ignored by git. For this project, I just left the client secret for Github's API visible on
-the server.
-
-## Scalability
-
-For a larger project, components should be smaller and more flexible, so that they can be reused across the whole project. This comes with extra work for writing and testing, so I
-decided not to split more than I did.
-
-For handling side effect on Redux, which in this case means just network requests, I used Redux Thunk. This middleware is easy to write, read, and test for fairly simple projects.
-For larger ones, it can become very unconvenient, and Redux Saga offers a better alternative. So if I was working on a more extensive project, I would have used this last library.
+It's always a good practice to check for type errors before running the code. For a serious project I would probably use Flow, which works really good with React.
