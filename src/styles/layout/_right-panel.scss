@@ -1,0 +1,7 @@
+.right-panel {
+  width: calc(50% - 20px);
+  height: calc(100% - 40px);
+  float: right;
+  padding: $padding-medium;
+  overflow-y: auto;
+}

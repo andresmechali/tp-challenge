@@ -1,0 +1,16 @@
+
+@mixin size($width, $height: auto) {
+  width: $width;
+  height: $height;
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+@mixin rounded-corner($arc) {
+  @include prefix(border-radius, 5px, ('moz', 'webkit'));
+}

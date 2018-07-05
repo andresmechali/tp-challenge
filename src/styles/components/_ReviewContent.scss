@@ -1,31 +1,24 @@
-.content {
-  width: calc(50% - 20px);
-  height: calc(100% - 40px);
-  float: right;
-  padding: 10px;
-  overflow-y: auto;
-}
-
 .nameRow {
   display: flow-root;
   position: relative;
-  margin-bottom: 0.5em;
+  margin-bottom: $margin-medium;
 }
 
 .reviewName {
   text-align: left;
-  font-size: 1.3em;
+  font-size: $font-large;
   float: left;
 }
 
 .reviewStars {
   float: right;
-  width: 120px;
+  @include size($review-width);
 }
 
 .reviewLocation {
   text-align: left;
-  margin-bottom: 1.2em;
+  margin-bottom: $margin-large;
+  color: $color-location;
 }
 
 .reviewContent {
@@ -33,15 +26,35 @@
   flex-direction: column;
 }
 
+.horizontal-line {
+  @include size(80%, 0);
+  border: solid 0.7px $color-border;
+}
+
 .title {
-  font-size: 1.1em;
-  font-weight: 500;
+  font-size: $font-large;
   text-align: left;
   font-style: italic;
-  margin-bottom: 0.7em;
+  margin-bottom: $margin-large;
 }
 
 .reviewBody {
-  font-size: 14px;
+  font-size: $font-medium;
   text-align: left;
+}
+
+.title-5-stars {
+  color: $color-5-stars;
+}
+.title-4-stars {
+  color: $color-4-stars;
+}
+.title-3-stars {
+  color: $color-3-stars;
+}
+.title-2-stars {
+  color: $color-2-stars;
+}
+.title-1-stars {
+  color: $color-1-stars;
 }
