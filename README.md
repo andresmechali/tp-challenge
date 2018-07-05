@@ -7,8 +7,12 @@ by Andrés Mechali
 The widget that I built has the intention to display a list of reviews, provided in the file `reviews.json`, and a
 series of details for the chosen review. It also provides a brief summary about the product, based both on a fake
 productName and in the given reviews.
+
 For styling, I would have liked to use [styled components]('https://www.styled-components.com/'), which I think is great,
 but the task was to use custom SASS.
+
+Lastly, it is important to make clear that responsiveness was not part of the design, so it will not display correctly
+on small screens.
 
 # Instructions
 
@@ -151,3 +155,8 @@ If I had more time to dedicate to this challenge, I would unit test extensively 
 ## Type checking
 
 It's always a good practice to check for type errors before running the code. For a serious project I would probably use Flow, which works really good with React.
+
+## Responsive
+
+As said before, this widget is intended to run on a web app, and has not been designed with responsiveness in mind. Some minor tweaks could allow it to
+be displayed nicely on mobiles.
