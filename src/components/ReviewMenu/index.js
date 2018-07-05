@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import reviewActions from '../../redux/actions/reviewActions';
 import ReviewList from '../ReviewList';
 
-import './styles.css';
-
 import processReviews from '../../utils/processReviews';
 
 class ReviewMenu extends Component {
@@ -17,15 +15,16 @@ class ReviewMenu extends Component {
   render() {
     const {
       reviews,
+      productName,
       activeReviewIndex,
       selectReview,
     } = this.props;
 
     return (
-      <div className="menu">
+      <div className="left-panel">
         <div className="product-information">
           <div className="product-name">
-            Product name
+            {productName}
           </div>
           <div className="review-summary">
             <img
@@ -50,16 +49,20 @@ class ReviewMenu extends Component {
 
 ReviewMenu.propTypes = {
   reviews: PropTypes.array.isRequired,
+  productName: PropTypes.string.isRequired,
   activeReviewIndex: PropTypes.number.isRequired,
   selectReview: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeReviewIndex: state.review.activeReviewIndex,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   selectReview: (review, index) => dispatch(reviewActions.selectReview(review, index)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewMenu);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReviewMenu);

@@ -1,5 +1,26 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
+
+// Configuration
+@import
+  "./styles/abstracts/variables",
+  "./styles/abstracts/mixins"
+;
+
+// Base
+@import
+  "./styles/base/fonts",
+  "./styles/base/base"
+;
+
+// Components
+@import
+  "./styles/components/ReviewContent",
+  "./styles/components/ReviewItem",
+  "./styles/components/ReviewList",
+  "./styles/components/ReviewMenu"
+;
+
+// Layout
+@import
+  "./styles/layout/left-panel",
+  "./styles/layout/right-panel"
+;
