@@ -1,0 +1,47 @@
+.content {
+  width: calc(50% - 20px);
+  height: calc(100% - 40px);
+  float: right;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.nameRow {
+  display: flow-root;
+  position: relative;
+  margin-bottom: 0.5em;
+}
+
+.reviewName {
+  text-align: left;
+  font-size: 1.3em;
+  float: left;
+}
+
+.reviewStars {
+  float: right;
+  width: 120px;
+}
+
+.reviewLocation {
+  text-align: left;
+  margin-bottom: 1.2em;
+}
+
+.reviewContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.1em;
+  font-weight: 500;
+  text-align: left;
+  font-style: italic;
+  margin-bottom: 0.7em;
+}
+
+.reviewBody {
+  font-size: 14px;
+  text-align: left;
+}

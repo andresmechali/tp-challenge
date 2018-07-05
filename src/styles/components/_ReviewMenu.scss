@@ -1,0 +1,30 @@
+.menu {
+  width: calc(50% - 2px);
+  height: 100%;
+  display: inline-block;
+  border-right: solid 2px rgb(225, 225, 225);
+}
+
+.product-information {
+  padding: 10px;
+}
+
+.product-name {
+  font-size: 1.4em;
+  text-align: left;
+  margin-bottom: 0.5em;
+}
+
+.review-summary {
+  display: flow-root;
+  position: relative;
+}
+
+.review-count {
+  float: right;
+}
+
+.average-review {
+  width: 120px;
+  float: left;
+}
