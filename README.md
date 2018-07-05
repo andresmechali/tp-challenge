@@ -2,26 +2,10 @@
 
 by Andrés Mechali
 
-# Table of Contents
-
-- Introduction
-- Instructions
-  - Demo
-  - Using Docker
-  - Without Docker
-    - Install
-    - Run
-- Architecture
-  - Folder structure
-  - Libraries
-- Further improvements
-  - Testing
-  - Responsive design
-
 # Introduction
 
 The widget that I built has the intention to display a list of reviews, provided in the file `reviews.json`, and a
-series of details for the chosen review. It also provides a brief summary about the product, based both in a fake
+series of details for the chosen review. It also provides a brief summary about the product, based both on a fake
 productName and in the given reviews.
 For styling, I would have liked to use [styled components]('https://www.styled-components.com/'), which I think is great,
 but the task was to use custom SASS.
